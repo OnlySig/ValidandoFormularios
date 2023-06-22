@@ -1,7 +1,23 @@
 import ehUmCpf from "./validaCpf.js";
 import ehMaiorDeIdade from "./validaIdade.js"
 
-const camposDoFormulario = document.querySelectorAll("[required]")
+const camposDoFormulario = document.querySelectorAll("[required]");
+const formulario = document.querySelector("[data-formulario]");
+
+formulario.addEventListener("submit", (event) => {
+    event.preventDefault()
+    //console.log(event.target.parentElement.elements['nome'].value)
+    const listaRespostas = {
+        "nome": event.target.elements['nome'].value,
+        "email": event.target.elements['email'].value,
+        "rg": event.target.elements['rg'].value,
+        "cpf": event.target.elements['cpf'].value,
+        "aniversario": event.target.elements['aniversario'].value,
+    }
+
+    localStorage.setItem("cadastro", JSON.stringify(listaRespostas))
+    window.location.href = '../pages/abrir-conta-form-2.html'
+})
 
 camposDoFormulario.forEach((campo) => {
     campo.addEventListener("blur", () => verificaCampo(campo));
